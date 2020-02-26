@@ -116,6 +116,8 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, filepath):
                 'state_dict': model.state_dict(),
                 'optimizer': optimizer.state_dict(),
                 'learning_rate': learning_rate}, filepath)
+    if hparams.checkpoint_store_command:
+        os.system(hparams.checkpoint_store_command.format(filepath))
 
 
 def validate(model, criterion, valset, iteration, batch_size, n_gpus,
